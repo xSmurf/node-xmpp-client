@@ -66,6 +66,47 @@ And some attributes are available :
  * _presences_
  * _roster_
 
+### Bytestreams XEP-00065 ###
+
+Outbound bytestreams are support with either direct connection or the xmpp server proxy.
+
+Creating a bytestream server
+
+	var s5bServer	= new BytestreamServer(client);
+
+Create a bew bytestream request
+
+	var data	= "abcde";
+	new Bytestream(s5bServer, {
+		name: "filename.txt",
+		mimeType: "plain/text",
+		length: data.size,
+		desc: "Text File Transfer",
+		data: data
+		}
+	}, stanza.attrs.from, stanza.attrs.id);
+
+data can also be a function:
+
+	data: function(stream) {
+		fs.readFile("/path/to/file", function (err, data) {
+			if (!err) {
+				stream.write(data, "ascii");
+			}
+		});
+	}
+
+The following configuration keys are used:
+
+	// Proxy mediated S5B settings
+	proxyJid:			"proxy.example.tld",
+	proxyHost:			"127.0.0.1",
+	proxyPort:			7777,
+	// Direct S5B settings
+	s5bHost:			"proxy.example.tld",
+	s5bPort:			8010,
+	
+
 ### IQ ###
 Iq is handled quietly. You can ask someone with a callback, for the response.
 
