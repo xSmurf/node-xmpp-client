@@ -70,6 +70,8 @@ And some attributes are available :
 
 Outbound bytestreams are support with either direct connection or the xmpp server proxy.
 
+This depends on (node-hash)[https://github.com/Marak/node_hash].
+
 Creating a bytestream server
 
 	var s5bServer	= new BytestreamServer(client);
